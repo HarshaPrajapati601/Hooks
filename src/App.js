@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useCallback, useState } from "react";
+import "./App.css";
+import Age from "./components/Age";
+import AgeButton from "./components/AgeButton";
+import Count from "./components/Count";
+import CountButton from "./components/CountButton";
+import Title from "./components/Title";
 
-function App() {
+const App = () => {
+  const [count, setCount] = useState(0);
+  const [age, setAge] = useState(10);
+
+  const incrementCount = useCallback(() => {
+    setCount((prevCount) => prevCount + 1);
+  }, []);
+
+  const incrementAge = useCallback(() => {
+    setAge((prevAge) => prevAge + 1);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Title />
+      <Count count={count} />
+      <CountButton handleCount={incrementCount} />
+      <Age age={age} />
+      <AgeButton handleAge={incrementAge} />
     </div>
   );
-}
+};
 
 export default App;
